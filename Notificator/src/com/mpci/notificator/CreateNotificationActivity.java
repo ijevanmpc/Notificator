@@ -10,13 +10,19 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
+/**
+ * This activity is used to create simple notification....
+ * 
+ * @author Artak and Artush
+ */
 public class CreateNotificationActivity extends Activity {
-	Button mSend;
-	EditText mText;
+	@SuppressWarnings("unused")
+	private Button mSend;
+	private EditText mText;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -25,7 +31,11 @@ public class CreateNotificationActivity extends Activity {
 		
 		
 	}
-
+	/**
+	 * @brief - This function used to run notification and change activity after clicking on it
+	 *        buttons
+	 * 
+	 */
 	@SuppressLint("NewApi")
 	public void createNotification(View view) {
 		Context context = getApplicationContext();
@@ -40,10 +50,9 @@ public class CreateNotificationActivity extends Activity {
 		NotificationManager nM = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 		Intent intent = new Intent(context, NotificationReceiverActivity.class);
-		//intent.putExtra("com.mpci.notificator.NotificationReceiverActivity", message);
 		PendingIntent pintent = PendingIntent
 				.getActivity(context, 0, intent, 0);
-		Notification notification = new Notification.Builder(context)
+		Notification notification = new NotificationCompat.Builder(context)
 				.setContentTitle("Artush").setContentText(message)
 				.setSmallIcon(R.drawable.ic_stat_notify_images)
 				.setLargeIcon(largeIcon)
@@ -58,4 +67,5 @@ public class CreateNotificationActivity extends Activity {
 		nM.notify(100, notification);
 
 	}
+	
 }
