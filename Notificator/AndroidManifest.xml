@@ -25,7 +25,7 @@
         <activity
             android:name="com.mpci.notificator.NotificationReceiverActivity"
             android:label="@string/title_activity_create_notification"
-            android:theme="@android:style/Theme.Dialog" >
+             >
         </activity>
     </application>
 

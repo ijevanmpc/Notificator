@@ -5,29 +5,33 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+
 /**
- * This activity is used to demonstrate example activity after clicking on notification....
+ * This activity is used to demonstrate example activity and show dialog after clicking on
+ * notification....
  * 
  * @author Artak and Artush
  */
 public class NotificationReceiverActivity extends Activity {
-	//EditText mMessage;
-	//TextView mText;
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    Dialog();
-    /*Intent intent = new Intent(this, CreateNotificationActivity.class);
-    startActivity(intent);
-    */
-   
-  }
-  
-  void Dialog(){
-	  AlertDialog.Builder builder = new AlertDialog.Builder(
-				this);
-		builder.setTitle("Notification!")
-				.setMessage("message")
+	static final String A = "";
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.result);
+		Dialog();
+
+	}
+	/**
+	 * @brief - This function used to create alert dialog when notification is clicked
+	 * 
+	 */
+	void Dialog() {
+		Intent intent = getIntent();
+		final String message = intent.getStringExtra(A);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Test Dialog!")
+				.setMessage(message)
 				.setIcon(R.drawable.ic_launcher)
 				.setCancelable(true)
 				.setPositiveButton("Okay",
@@ -38,9 +42,7 @@ public class NotificationReceiverActivity extends Activity {
 						});
 		AlertDialog alert = builder.create();
 		alert.show();
-//	    Intent intent = new Intent(this, CreateNotificationActivity.class);
-//		startActivity(intent);
-  }
- 
-  
-} 
+
+	}
+
+}

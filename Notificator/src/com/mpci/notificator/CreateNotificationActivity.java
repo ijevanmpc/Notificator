@@ -2,12 +2,10 @@ package com.mpci.notificator;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -44,18 +42,24 @@ public class CreateNotificationActivity extends Activity {
 		Context context = getApplicationContext();
 		mText = (EditText) findViewById(R.id.editText);
 		String message = mText.getText().toString();
-
+		
+		//this tool allow to use icon as Bitmap
 		Bitmap largeIcon = BitmapFactory.decodeResource(getResources(),
 				R.drawable.ic_launcher);
 
-		// Prepare intent which is triggered if the
+		
 		// notification is selected
 		NotificationManager nM = (NotificationManager) context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
-		//Intent intent = new Intent(context, NotificationReceiverActivity.class);
+		
+		// Prepare intent which is triggered if the notification is clicked
 		Intent intent = new Intent(context, NotificationReceiverActivity.class);
+		intent.putExtra(NotificationReceiverActivity.A, message);
+		
+		//pintent will pend created intent
 		PendingIntent pintent = PendingIntent
 				.getActivity(context, 0, intent, 0);
+		//Creating new notification
 		Notification notification = new NotificationCompat.Builder(context)
 				.setContentTitle("Artush").setContentText(message)
 				.setSmallIcon(R.drawable.ic_stat_notify_images)
@@ -70,29 +74,6 @@ public class CreateNotificationActivity extends Activity {
 
 		nM.notify(1, notification);
 
-	}
-	/**
-	 * @brief - This function used to create alert dialog when notification is clicked
-	 * 
-	 */
-	public void Dialog() {
-		mText = (EditText) findViewById(R.id.editText);
-		final String message = mText.getText().toString();
-		AlertDialog.Builder builder = new AlertDialog.Builder(
-				CreateNotificationActivity.this);
-		builder.setTitle("Notification!")
-				.setMessage(message)
-				.setIcon(R.drawable.ic_launcher)
-				.setCancelable(false)
-				.setPositiveButton("Okay",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								dialog.cancel();
-							}
-						});
-		AlertDialog alert = builder.create();
-		alert.show();
-		
 	}
 
 }
